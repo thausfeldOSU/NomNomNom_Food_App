@@ -4,6 +4,9 @@
 // Express
 const express = require('express');
 const app = express();
+const fs = require('fs');
+const path = require('path');
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
@@ -35,12 +38,13 @@ app.get('/', async function (req, res) {
 app.get('/nnn_food_items', async function (req, res) {
     try {
         // Create and execute our queries
-        const query1 = `SELECT * FROM FOOD_ITEMS;`;
+        const query1 = fs.readFileSync(path.join(__dirname, 'queries', 'nnn_food_items.sql'), 'utf8');
         const [food] = await db.query(query1);
 
+        console.log("Query Results: ", food);
         // Render the nnn_food_items.hbs file, and also send the renderer
         //  an object that contains the results of the query
-        res.render('nnn_food_items', { food: food});
+        res.render('nnn_food_items', {food: food});
     } catch (error) {
         console.error('Error executing queries:', error);
         // Send a generic error message to the browser
@@ -53,7 +57,7 @@ app.get('/nnn_food_items', async function (req, res) {
 app.get('/nnn_restaurants', async function (req, res) {
     try {
         // Create and execute our queries
-        const query1 = `SELECT * FROM RESTAURANTS;`;
+        const query1 = fs.readFileSync(path.join(__dirname, 'queries', 'nnn_restaurants.sql'), 'utf8');
         const [restaurant] = await db.query(query1);
 
         // Render the nnn_restaurants.hbs file, and also send the renderer
@@ -71,7 +75,7 @@ app.get('/nnn_restaurants', async function (req, res) {
 app.get('/nnn_customers', async function (req, res) {
     try {
         // Create and execute our queries
-        const query1 = `SELECT * FROM CUSTOMERS;`;
+        const query1 = fs.readFileSync(path.join(__dirname, 'queries', 'nnn_customers.sql'), 'utf8');
         const [customer] = await db.query(query1);
 
         // Render the nnn_customers.hbs file, and also send the renderer
@@ -86,7 +90,7 @@ app.get('/nnn_customers', async function (req, res) {
     }
 });
 
-app.get('/nnn_orders', async function (req, res) {
+app.get('/nnn_food_items_orders', async function (req, res) {
     try {
         // Create and execute our queries
 
@@ -97,12 +101,12 @@ app.get('/nnn_orders', async function (req, res) {
            in this .get() block, but maybe that's for a seperate .get() block? Like would we have one .get() to catch a click on a DELETE
            button on this page or would we keep it in here? Same question for CREATE and UPDATE.
         */
-        const query1 = `SELECT * FROM FOOD_ITEMS_ORDERS;`;
-        const [customer] = await db.query(query1);
+        const query1 = fs.readFileSync(path.join(__dirname, 'queries', 'nnn_food_items_orders.sql'), 'utf8');
+        const [order] = await db.query(query1);
 
         // Render the nnn_food_items_orders.hbs file, and also send the renderer
         //  an object that contains the results of the query
-        res.render('nnn_food_items_orders', { customer: customer});
+        res.render('nnn_food_items_orders', { order: order});
     } catch (error) {
         console.error('Error executing queries:', error);
         // Send a generic error message to the browser
