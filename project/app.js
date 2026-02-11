@@ -41,10 +41,12 @@ app.get('/nnn_food_items', async function (req, res) {
         const query1 = fs.readFileSync(path.join(__dirname, 'queries', 'nnn_food_items.sql'), 'utf8');
         const [food] = await db.query(query1);
 
-        console.log("Query Results: ", food);
+        const query2 = fs.readFileSync(path.join(__dirname, 'queries', 'nnn_food_items-restaurant_list.sql'), 'utf8');
+        const [restaurant] = await db.query(query2);
+
         // Render the nnn_food_items.hbs file, and also send the renderer
         //  an object that contains the results of the query
-        res.render('nnn_food_items', {food: food});
+        res.render('nnn_food_items', {food: food, restaurant: restaurant});
     } catch (error) {
         console.error('Error executing queries:', error);
         // Send a generic error message to the browser
