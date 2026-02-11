@@ -5,7 +5,7 @@
     <thead>
         {{! For the table header row, we print the DB attribute names }}
         <tr>
-            {{#each people.[0]}}
+            {{#each food.[0]}}
             <th>
                 {{@key}}
             </th>
@@ -16,18 +16,16 @@
 
     <tbody>
         {{! For each row, print the id, fname, lname, homeworld and age }}
-        {{#each people}}
+        {{#each food}}
         <tr>
-            <td>{{this.id}</td>
-            <td>{{this.fname}}</td>
-            <td>{{this.lname}}</td>
-            <td>{{this.homeworld}}</td>
-            <td>{{this.age}}</td>
+            <td>{{this.RESTAURANT_NAME}}</td>
+            <td>{{this.FOOD_NAME}}</td>
+            <td>{{this.PRICE}}</td>
 
             {{! DELETE form }}
             <form id='delete_person_form'>
-                <input type='hidden' name='delete_person_id' value='{{this.id}}' />
-                <input type='hidden' name='delete_person_name' value='{{this.fname}} {{this.lname}}' />
+                <input type='hidden' name='delete_food_id' value='{{this.FOOD_ITEM_ID}}' />
+                <input type='hidden' name='delete_food_name' value='{{this.NAME}}' />
                 <td>
                     <button type='submit'>
                         Delete

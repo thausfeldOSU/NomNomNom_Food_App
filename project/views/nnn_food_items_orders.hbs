@@ -5,7 +5,7 @@
     <thead>
         {{! For the table header row, we print the DB attribute names }}
         <tr>
-            {{#each people.[0]}}
+            {{#each order.[0]}}
             <th>
                 {{@key}}
             </th>
@@ -16,13 +16,14 @@
 
     <tbody>
         {{! For each row, print the id, fname, lname, homeworld and age }}
-        {{#each people}}
+        {{#each order}}
         <tr>
-            <td>{{this.id}}</td>
-            <td>{{this.fname}}</td>
-            <td>{{this.lname}}</td>
-            <td>{{this.homeworld}}</td>
-            <td>{{this.age}}</td>
+            <td>{{this.ORDER_ID}}</td>
+            <td>{{this.ORDER_DATE}}</td>
+            <td>{{this.CUSTOMER_NAME}}</td>
+            <td>{{this.RESTAURANT_NAME}}</td>
+            <td>{{this.FOOD_NAME}}</td>
+            <td>{{this.ITEM_PRICE}}</td>
 
             {{! DELETE form }}
             <form id='delete_person_form'>
