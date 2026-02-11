@@ -11,3 +11,4 @@ http://classwork.engr.oregonstate.edu:5000
 
 If you run this from your local machine, go to
 http://localhost:5000
+If you do run from localhost, just know that the home page is probably all that will work because the database is on OSU servers.
