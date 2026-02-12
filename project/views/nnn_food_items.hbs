@@ -15,7 +15,6 @@
     </thead>
 
     <tbody>
-        {{! For each row, print the id, fname, lname, homeworld and age }}
         {{#each food}}
         <tr>
             <td>{{this.RESTAURANT_NAME}}</td>
@@ -58,34 +57,32 @@
 </form>
 
 {{! UPDATE form }}
-<h2>Update a Person</h2>
-<form class='cuForm' id='update_person_form'>
-    <label for='update_person_id'>Person to Update: </label>
-    <select name='update_person_id' id='update_person_id' required>
-        <option value='' disabled selected>Select a Person</option>
-        {{#each people}}
-        <option value='{{this.id}}' required>
-            {{this.id}}
-            -
-            {{this.fname}}
-            {{this.lname}}
+{{! FOOD_ITEM needs the following fields in order to update: FOOD_ITEM_ID, RESTAURANT_ID, NAME (name of the food), and a PRICE }}
+<h2>Update a Food Item</h2>
+<form class='cuForm' id='update_food_form'>
+    <label for='update_food_id'>Food to Update: </label>
+    <select name='update_food_id' id='update_food_id' required>
+        <option value='' disabled selected>Select a Food Item</option>
+        {{#each foods}}
+        <option value='{{this.FOOD_ITEM_ID}}' required>
+            {{this.NAME}}
         </option>
         {{/each}}
     </select>
 
-    <label for='update_person_homeworld'>Homeworld: </label>
-    <select name='update_person_homeworld' id='update_person_homeworld'>
-        <option value='NULL' disabled selected>Select a Planet</option>
+    <label for='update_food_item_restaurant'>Restaurant: </label>
+    <select name='update_food_item_restaurant' id='update_food_item_restaurant'>
+        <option value='NULL' disabled selected>Select a Restaurant</option>
         <option value='NULL'>&lt; None &gt;</option>
-        {{#each homeworlds}}
-        <option value='{{this.id}}' required>
-            {{this.name}}
+        {{#each restaurant}}
+        <option value='{{this.RESTAURANT_ID}}' required>
+            {{this.NAME}} {{! The FOOD_ITEM table has restaurants stored as a numerical foreign key so return the ID, not the name for updating the table }}
         </option>
         {{/each}}
     </select>
 
-    <label for='update_person_age'>Age: </label>
-    <input type='number' name='update_person_age' id='update_person_age' min='0' />
+    <label for='update_food_item_price'>Price: </label>
+    <input type='number' name='update_food_item_price' id='update_food_item_price' min='0' />
 
     <input type='submit' />
 </form>
