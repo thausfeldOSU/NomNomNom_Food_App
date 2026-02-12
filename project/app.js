@@ -109,9 +109,12 @@ app.get('/nnn_food_items_orders', async function (req, res) {
         const query1 = fs.readFileSync(path.join(__dirname, 'queries', 'nnn_food_items_orders.sql'), 'utf8');
         const [order] = await db.query(query1);
 
+        const query2 = fs.readFileSync(path.join(__dirname, 'queries', 'nnn_orders.sql'), 'utf8');
+        const [orders] = await db.query(query2);
+
         // Render the nnn_food_items_orders.hbs file, and also send the renderer
         //  an object that contains the results of the query
-        res.render('nnn_food_items_orders', { order: order});
+        res.render('nnn_food_items_orders', { order: order, orders: orders});
     } catch (error) {
         console.error('Error executing queries:', error);
         // Send a generic error message to the browser
