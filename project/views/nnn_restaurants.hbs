@@ -24,8 +24,9 @@
             <td>{{this.ADDRESS}}</td>
             <td>{{this.EMAIL}}</td>
 
+            {{!-- Took out since our delete is on Food Items and Orders pages --}}
             {{! DELETE form }}
-            <form id='delete_person_form'>
+            {{!-- <form id='delete_person_form'>
                 <input type='hidden' name='delete_person_id' value='{{this.id}}' />
                 <input type='hidden' name='delete_person_name' value='{{this.fname}} {{this.lname}}' />
                 <td>
@@ -33,65 +34,11 @@
                         Delete
                     </button>
                 </td>
-            </form>
+            </form> --}}
         </tr>
         {{/each}}
     </tbody>
 </table>
 
-{{! CREATE form }}
-<h2>Create a Person</h2>
-<form class='cuForm' id='create_person_form'>
-    <label for='create_person_fname'>First Name: </label>
-    <input type='text' name='create_person_fname' id='create_person_fname' required />
-
-    <label for='create_person_lname'>Last Name: </label>
-    <input type='text' name='create_person_lname' id='create_person_lname' />
-
-    <label for='create_person_homeworld'>Homeworld: </label>
-    <select name='create_person_homeworld' id='create_person_homeworld'>
-        <option value='NULL' selected>Select a Planet</option>
-        <option value='NULL'>&lt; None &gt;</option>
-        {{#each homeworlds}}
-        <option value='{{this.id}}' required>{{this.name}}</option>
-        {{/each}}
-    </select>
-
-    <label for='create_person_age'>Age:</label>
-    <input type='number' name='create_person_age' id='create_person_age' min='0' />
-
-    <input type='submit' />
-</form>
-
-{{! UPDATE form }}
-<h2>Update a Person</h2>
-<form class='cuForm' id='update_person_form'>
-    <label for='update_person_id'>Person to Update: </label>
-    <select name='update_person_id' id='update_person_id' required>
-        <option value='' disabled selected>Select a Person</option>
-        {{#each people}}
-        <option value='{{this.id}}' required>
-            {{this.id}}
-            -
-            {{this.fname}}
-            {{this.lname}}
-        </option>
-        {{/each}}
-    </select>
-
-    <label for='update_person_homeworld'>Homeworld: </label>
-    <select name='update_person_homeworld' id='update_person_homeworld'>
-        <option value='NULL' disabled selected>Select a Planet</option>
-        <option value='NULL'>&lt; None &gt;</option>
-        {{#each homeworlds}}
-        <option value='{{this.id}}' required>
-            {{this.name}}
-        </option>
-        {{/each}}
-    </select>
-
-    <label for='update_person_age'>Age: </label>
-    <input type='number' name='update_person_age' id='update_person_age' min='0' />
-
-    <input type='submit' />
-</form>
+{{!-- Took out INSERT since this is on Food Items --}}
+{{!-- Took out UPDATE since this is on Food Items and Orders --}}
