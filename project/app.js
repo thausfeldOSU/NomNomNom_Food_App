@@ -11,7 +11,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
-const PORT = 5000;
+const PORT = 5001;
 
 // Database
 const db = require('./database/db-connector');
@@ -44,9 +44,12 @@ app.get('/nnn_food_items', async function (req, res) {
         const query2 = fs.readFileSync(path.join(__dirname, 'queries', 'nnn_food_items-restaurant_list.sql'), 'utf8');
         const [restaurant] = await db.query(query2);
 
+        const query3 = fs.readFileSync(path.join(__dirname, 'queries', 'nnn_food_items-list.sql'), 'utf8');
+        const [foods] = await db.query(query3);
+
         // Render the nnn_food_items.hbs file, and also send the renderer
         //  an object that contains the results of the query
-        res.render('nnn_food_items', {food: food, restaurant: restaurant});
+        res.render('nnn_food_items', {food: food, restaurant: restaurant, foods: foods});
     } catch (error) {
         console.error('Error executing queries:', error);
         // Send a generic error message to the browser
