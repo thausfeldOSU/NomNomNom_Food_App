@@ -40,59 +40,38 @@
     </tbody>
 </table>
 
-{{! CREATE form }}
-<h2>Create a Person</h2>
-<form class='cuForm' id='create_person_form'>
-    <label for='create_person_fname'>First Name: </label>
-    <input type='text' name='create_person_fname' id='create_person_fname' required />
-
-    <label for='create_person_lname'>Last Name: </label>
-    <input type='text' name='create_person_lname' id='create_person_lname' />
-
-    <label for='create_person_homeworld'>Homeworld: </label>
-    <select name='create_person_homeworld' id='create_person_homeworld'>
-        <option value='NULL' selected>Select a Planet</option>
-        <option value='NULL'>&lt; None &gt;</option>
-        {{#each homeworlds}}
-        <option value='{{this.id}}' required>{{this.name}}</option>
-        {{/each}}
-    </select>
-
-    <label for='create_person_age'>Age:</label>
-    <input type='number' name='create_person_age' id='create_person_age' min='0' />
-
-    <input type='submit' />
-</form>
+{{!-- Removed CREATE, do not need for M:M and already have on Food Items page --}}
 
 {{! UPDATE form }}
-<h2>Update a Person</h2>
-<form class='cuForm' id='update_person_form'>
-    <label for='update_person_id'>Person to Update: </label>
-    <select name='update_person_id' id='update_person_id' required>
-        <option value='' disabled selected>Select a Person</option>
-        {{#each people}}
-        <option value='{{this.id}}' required>
-            {{this.id}}
-            -
-            {{this.fname}}
-            {{this.lname}}
+<h2>Update an Orders Details</h2>
+<form class='cuForm' id='update_order_id_form'>
+    <label for='update_order_id'>Order Number to Update: </label>
+    <select name='update_order_id' id='update_order_id' required>
+        <option value='' disabled selected>Order Number</option>
+        {{#each orders}}
+        <option value='{{this.ORDER_ID}}' required>
+            {{this.ORDER_ID}}
         </option>
         {{/each}}
     </select>
 
-    <label for='update_person_homeworld'>Homeworld: </label>
-    <select name='update_person_homeworld' id='update_person_homeworld'>
-        <option value='NULL' disabled selected>Select a Planet</option>
-        <option value='NULL'>&lt; None &gt;</option>
-        {{#each homeworlds}}
-        <option value='{{this.id}}' required>
-            {{this.name}}
+    <label for='update_food_item_id'>Food Item to Update: </label>
+    <select name='update_food_item_id' id='update_food_item_id'>
+        <option value='' disabled selected>Food Item</option>
+        {{#each orders}}
+        <option value='{{this.FOOD_ITEM_ID}}' required>
+            {{this.NAME}}
         </option>
         {{/each}}
     </select>
 
-    <label for='update_person_age'>Age: </label>
-    <input type='number' name='update_person_age' id='update_person_age' min='0' />
+    {{!-- In order to be able to update something for the M:M we have, maybe we should add a field to be updated
+            our primary key in the intersection table is the order id plus the food item id, so would need
+            something else to update as we wouldn't be updating a PK, but rather other attributes.
+            Maybe you can add this to our DDL, and update the Step 3 draft to include this change?
+     --}}
+    <label for='update_order_food_item_quantity'>Quantity: </label>
+    <input type='number' name='update_order_food_item_quantity' id='update_order_food_item_quantity' min='0' />
 
     <input type='submit' />
 </form>
