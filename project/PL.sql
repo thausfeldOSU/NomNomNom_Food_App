@@ -28,11 +28,12 @@ END //
 
 
 -- Delete an order
-DROP PROCEDURE IF EXISTS DELETE_ORDER;
+DROP PROCEDURE IF EXISTS DELETE_ORDER_FOOD_ITEM;
 DELIMITER //
 
-CREATE PROCEDURE DELETE_ORDER(
-    IN p_orderId INT
+CREATE PROCEDURE DELETE_ORDER_FOOD_ITEM(
+    IN p_orderId INT,
+    IN p_foodId INT
 )
 BEGIN
     DECLARE EXIT HANDLER FOR SQLEXCEPTION
@@ -45,12 +46,12 @@ BEGIN
     
     -- Delete all instances of the order in the intersection table
     DELETE FROM FOOD_ITEMS_ORDERS
-    WHERE ORDER_ID = p_orderId;
+    WHERE (ORDER_ID = p_orderId AND FOOD_ITEM_ID = p_foodId);
     -- WHERE FOOD_ITEM_ID IN (SELECT FOOD_ITEM_ID FROM FOOD_ITEM_ORDERS WHERE ORDER_ID = p_orderId);
        
     -- Delete the order itself
-    DELETE FROM ORDERS 
-    WHERE ORDER_ID = p_orderId;
+    -- DELETE FROM ORDERS 
+    -- WHERE ORDER_ID = p_orderId;
     
     COMMIT;
 END //
