@@ -73,7 +73,7 @@ BEGIN
     VALUES
         (4.2, 'Duffies', '5032354485', '123 NW Jackson Ave, Corvallis, OR 97330', 'duffies@aol.net'),
         (4.8, 'Razorback Pit BBQ', '5031235489', '1569 NW Monroe Ave, Corvallis, OR 97330', 'razorbackbbq@razor.com'),
-        (3.3, 'McDonalds', '5038763365', '300 NW 3rd St, Corvallis, OR 97330', NULL);
+        (3.3, 'McDonalds', '5038763365', '300 NW 3rd St, Corvallis, OR 97330', 'NULL');
 
     INSERT INTO FOOD_ITEMS (RESTAURANT_ID, NAME, PRICE)
     VALUES
