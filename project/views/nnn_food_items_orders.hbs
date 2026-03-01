@@ -19,6 +19,7 @@
         {{#each order}}
         <tr>
             <td>{{this.ORDER_ID}}</td>
+            <td>{{this.FOOD_ID}}</td>
             <td>{{this.ORDER_DATE}}</td>
             <td>{{this.CUSTOMER_NAME}}</td>
             <td>{{this.RESTAURANT_NAME}}</td>
@@ -26,9 +27,9 @@
             <td>{{this.ITEM_PRICE}}</td>
 
             {{! DELETE form }}
-            <form id='delete_person_form'>
-                <input type='hidden' name='delete_person_id' value='{{this.id}}' />
-                <input type='hidden' name='delete_person_name' value='{{this.fname}} {{this.lname}}' />
+            <form action='delete_order_food' method="POST">
+                <input type='hidden' name='delete_order_id' value="{{this.ORDER_ID}}"/>
+                <input type='hidden' name='delete_food_id' value="{{this.FOOD_ID}}"/>
                 <td>
                     <button type='submit'>
                         Delete
