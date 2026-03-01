@@ -24,7 +24,48 @@ app.set('view engine', '.hbs'); // Use handlebars engine for *.hbs files.
 // ########################################
 // ########## ROUTE HANDLERS
 
-// READ ROUTES
+
+// ##### RESET TO BASELINE DATABASE WITH DUMMY DATA
+app.post('/reset_db', async (req, res) => {
+    try {
+        const query1 = 'CALL sp_load_nnndb();';
+        await db.query(query1);
+        res.redirect('/');
+        // res.status(200).json({ message: 'Database reset successfully' });
+    } 
+    catch (error) {
+        console.error("Error resetting database:", error);
+        res.status(500).send("An error occurred while resetting the database.");
+    }
+});
+
+// ###### DELETE ROUTES
+app.post('/delete_food_item', async function (req, res) {
+    try {
+        const foodId = req.body.delete_food_id;
+
+        await db.query('CALL DELETE_FOOD_ITEM(?)', [foodId]);
+        res.redirect('/nnn_food_items');
+    } catch (error) {
+        console.error("Error deleting food item:", error);
+        res.status(500).send("An error occurred while deleting the food item.");
+    }
+});
+
+app.post('/delete_order_food', async function (req, res) {
+    try {
+        const orderId = req.body.delete_order_id
+        const foodId = req.body.delete_food_id;
+
+        await db.query('CALL DELETE_ORDER_FOOD_ITEM(?, ?)', [orderId, foodId]);
+        res.redirect('/nnn_food_items_orders');
+    } catch (error) {
+        console.error("Error deleting:", error);
+        res.status(500).send("An error occurred while deleting.");
+    }
+});
+
+// ###### READ ROUTES
 app.get('/', async function (req, res) {
     try {
         res.render('home'); // Render the home.hbs file
