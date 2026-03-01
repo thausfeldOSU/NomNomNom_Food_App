@@ -17,7 +17,7 @@ BEGIN
     -- Delete all instances of the food item in the intersection table
     DELETE FROM FOOD_ITEMS_ORDERS
     WHERE FOOD_ITEM_ID = p_foodItemId;
-    --WHERE ORDER_ID IN (SELECT ORDER_ID FROM FOOD_ITEM_ORDERS WHERE FOOD_ITEM_ID = p_foodItemId);
+    -- WHERE ORDER_ID IN (SELECT ORDER_ID FROM FOOD_ITEM_ORDERS WHERE FOOD_ITEM_ID = p_foodItemId);
        
     -- Delete the food item itself
     DELETE FROM FOOD_ITEMS 
@@ -46,7 +46,7 @@ BEGIN
     -- Delete all instances of the order in the intersection table
     DELETE FROM FOOD_ITEMS_ORDERS
     WHERE ORDER_ID = p_orderId;
-    --WHERE FOOD_ITEM_ID IN (SELECT FOOD_ITEM_ID FROM FOOD_ITEM_ORDERS WHERE ORDER_ID = p_orderId);
+    -- WHERE FOOD_ITEM_ID IN (SELECT FOOD_ITEM_ID FROM FOOD_ITEM_ORDERS WHERE ORDER_ID = p_orderId);
        
     -- Delete the order itself
     DELETE FROM ORDERS 
@@ -54,3 +54,5 @@ BEGIN
     
     COMMIT;
 END //
+
+DELIMITER ;
