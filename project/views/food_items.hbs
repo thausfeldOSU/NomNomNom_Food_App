@@ -38,7 +38,8 @@
 
 {{! CREATE form }}
 <h2>Create a New Food Item</h2>
-<form class='cuForm' id='create_food_item_form'>
+{{!-- class='cuForm'  --}}
+<form action='create_food_item' method="POST">
     <label for='create_food_item_name'>Name: </label>
     <input type='text' name='create_food_item_name' id='create_food_item_name' required />
 
