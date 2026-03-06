@@ -11,7 +11,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
-const PORT = 5001;
+// 5002 for testing
+const PORT = 5002;
+// 5001
 
 // Database
 const db = require('./database/db-connector');
@@ -51,6 +53,23 @@ app.post('/delete_food_item', async function (req, res) {
         res.status(500).send("An error occurred while deleting the food item.");
     }
 });
+
+// ###### CREATE ROUTE
+app.post('/create_food_item', async function (req, res) {
+    try {
+        const restaurantName = req.body.create_food_item_restaurant;
+        const name = req.body.create_food_item_name;
+        const price = req.body.create_food_item_price;
+
+        await db.query('CALL CREATE_FOOD_ITEM(?, ?, ?)', [restaurantName, name, price]);
+        res.redirect('/food_items');
+    } catch (error) {
+        console.error("Error creating food item:", error);
+        res.status(500).send("An error occurred while creating the food item.");
+    }
+});
+
+//CREATE_FOOD_ITEM
 
 app.post('/delete_order_food', async function (req, res) {
     try {
