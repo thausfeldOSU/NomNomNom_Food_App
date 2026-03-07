@@ -12,7 +12,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
 // 5002 for testing
-const PORT = 5002;
+const PORT = 5001;
 // 5001
 
 // Database
@@ -20,6 +20,7 @@ const db = require('./database/db-connector');
 
 // Handlebars
 const { engine } = require('express-handlebars'); // Import express-handlebars engine
+const { validateHeaderName } = require('http');
 app.engine('.hbs', engine({ extname: '.hbs' })); // Create instance of handlebars
 app.set('view engine', '.hbs'); // Use handlebars engine for *.hbs files.
 
@@ -54,6 +55,19 @@ app.post('/delete_food_item', async function (req, res) {
     }
 });
 
+app.post('/delete_order_food', async function (req, res) {
+    try {
+        const orderId = req.body.delete_order_id
+        const foodId = req.body.delete_food_id;
+
+        await db.query('CALL DELETE_ORDER_FOOD_ITEM(?, ?)', [orderId, foodId]);
+        res.redirect('/food_items_orders');
+    } catch (error) {
+        console.error("Error deleting:", error);
+        res.status(500).send("An error occurred while deleting.");
+    }
+});
+
 // ###### CREATE ROUTE
 app.post('/create_food_item', async function (req, res) {
     try {
@@ -69,20 +83,38 @@ app.post('/create_food_item', async function (req, res) {
     }
 });
 
-//CREATE_FOOD_ITEM
-
-app.post('/delete_order_food', async function (req, res) {
+// ###### UPDATE ROUTE
+app.post('/update_food_item', async function (req, res) {
     try {
-        const orderId = req.body.delete_order_id
-        const foodId = req.body.delete_food_id;
+        const foodItemID = req.body.update_food_item_name_id;
+        const restaurantID = req.body.update_food_item_restaurant_id;
+        const foodName = req.body.update_food_item_name;
+        const price = req.body.update_food_item_price;
 
-        await db.query('CALL DELETE_ORDER_FOOD_ITEM(?, ?)', [orderId, foodId]);
-        res.redirect('/food_items_orders');
+        await db.query('CALL UPDATE_FOOD_ITEM(?, ?, ?, ?)', [foodItemID, restaurantID, foodName, price]);
+        res.redirect('/food_items');
     } catch (error) {
-        console.error("Error deleting:", error);
-        res.status(500).send("An error occurred while deleting.");
+        console.error("Error updating food item:", error);
+        res.status(500).send("An error occurred while updating the food item.");
     }
 });
+
+app.post('/update_food_items_orders', async function (req, res) {
+    try {
+
+        // const val = req.body.update_order_id_food_id
+        // const [orderId, foodItemId] = val.split('|');
+        const [orderId, foodItemId] = req.body.update_order_id_food_id.split('|');
+        const quantity = req.body.update_food_item_order_quantity;
+
+        await db.query('CALL UPDATE_FOOD_ITEMS_ORDERS(?, ?, ?)', [orderId, foodItemId, quantity]);
+        res.redirect('/food_items_orders');
+    } catch (error) {
+        console.error("Error updating food item:", error);
+        res.status(500).send("An error occurred while updating the food item.");
+    }
+});
+
 
 // ###### READ ROUTES
 app.get('/', async function (req, res) {
@@ -159,13 +191,6 @@ app.get('/food_items_orders', async function (req, res) {
     try {
         // Create and execute our queries
 
-        /* 
-           Tommy comments 2/10
-           First off, I think turning the page for ORDERS into a view of our intersection table is appropriate. We could showcase the M:M CRUD
-           operations on this page. If you agree, then we would need more than just this SELECT statement. I am assuming it would go here
-           in this .get() block, but maybe that's for a seperate .get() block? Like would we have one .get() to catch a click on a DELETE
-           button on this page or would we keep it in here? Same question for CREATE and UPDATE.
-        */
         const query1 = fs.readFileSync(path.join(__dirname, 'queries', 'food_items_orders.sql'), 'utf8');
         const [order] = await db.query(query1);
 
