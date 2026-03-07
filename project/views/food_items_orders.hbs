@@ -25,6 +25,7 @@
             <td>{{this.RESTAURANT_NAME}}</td>
             <td>{{this.FOOD_NAME}}</td>
             <td>{{this.ITEM_PRICE}}</td>
+            <td>{{this.QUANTITY}}</td>
 
             {{! DELETE form }}
             <form action='delete_order_food' method="POST">
@@ -45,34 +46,19 @@
 
 {{! UPDATE form }}
 <h2>Update an Orders Details</h2>
-<form class='cuForm' id='update_order_id_form'>
-    <label for='update_order_id'>Order Number to Update: </label>
-    <select name='update_order_id' id='update_order_id' required>
-        <option value='' disabled selected>Order Number</option>
+<form action='update_food_items_orders' method="POST">
+    <label for='update_order_id_food_id'>Order Number - Food Item: </label>
+    <select name='update_order_id_food_id' id='update_order_id_food_id' required>
+        <option value='' disabled selected>Order Number - Food Item</option>
         {{#each orders}}
-        <option value='{{this.ORDER_ID}}' required>
-            {{this.ORDER_ID}}
+        <option value="{{this.ORDER_ID}}|{{this.FOOD_ITEM_ID}}" required>
+            {{this.ORDER_ID}} - {{this.FOOD_ITEM_ID}}
         </option>
         {{/each}}
     </select>
 
-    <label for='update_food_item_id'>Food Item to Update: </label>
-    <select name='update_food_item_id' id='update_food_item_id'>
-        <option value='' disabled selected>Food Item</option>
-        {{#each orders}}
-        <option value='{{this.FOOD_ITEM_ID}}' required>
-            {{this.NAME}}
-        </option>
-        {{/each}}
-    </select>
-
-    {{!-- In order to be able to update something for the M:M we have, maybe we should add a field to be updated
-            our primary key in the intersection table is the order id plus the food item id, so would need
-            something else to update as we wouldn't be updating a PK, but rather other attributes.
-            Maybe you can add this to our DDL, and update the Step 3 draft to include this change?
-     --}}
-    <label for='update_order_food_item_quantity'>Quantity: </label>
-    <input type='number' name='update_order_food_item_quantity' id='update_order_food_item_quantity' min='0' />
+    <label for='update_food_item_order_quantity'>Quantity: </label>
+    <input type='number' name='update_food_item_order_quantity' id='update_food_item_order_quantity' min='1' />
 
     <input type='submit' />
 </form>
