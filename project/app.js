@@ -1,5 +1,12 @@
-// ########################################
-// ########## SETUP
+// Citation:
+// Google AI helped setup all the POST route templates.
+// Google AI helped setup 
+// Google AI helped set this up so that I could store the SQL in their own files and just reference them here for execution.
+//
+// Started off with the template provided
+//
+// Otherwise, All My Work
+
 
 // Express
 const express = require('express');
@@ -12,7 +19,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
 // 5002 for testing
-const PORT = 5001;
+const PORT = 5002;
 // 5001
 
 // Database
@@ -34,7 +41,6 @@ app.post('/reset_db', async (req, res) => {
         const query1 = 'CALL sp_load_nnndb();';
         await db.query(query1);
         res.redirect('/');
-        // res.status(200).json({ message: 'Database reset successfully' });
     } 
     catch (error) {
         console.error("Error resetting database:", error);
@@ -102,8 +108,7 @@ app.post('/update_food_item', async function (req, res) {
 app.post('/update_food_items_orders', async function (req, res) {
     try {
 
-        // const val = req.body.update_order_id_food_id
-        // const [orderId, foodItemId] = val.split('|');
+        // Google AI helped with the split functionality since the hbs file was setup to send these two attributes concatenated
         const [orderId, foodItemId] = req.body.update_order_id_food_id.split('|');
         const quantity = req.body.update_food_item_order_quantity;
 
@@ -119,10 +124,9 @@ app.post('/update_food_items_orders', async function (req, res) {
 // ###### READ ROUTES
 app.get('/', async function (req, res) {
     try {
-        res.render('home'); // Render the home.hbs file
+        res.render('home');
     } catch (error) {
         console.error('Error rendering page:', error);
-        // Send a generic error message to the browser
         res.status(500).send('An error occurred while rendering the page.');
     }
 });
@@ -130,6 +134,8 @@ app.get('/', async function (req, res) {
 app.get('/food_items', async function (req, res) {
     try {
         // Create and execute our queries
+        // Google AI helped set this up so that I could store the SQL in their own files and just reference them here for execution.
+        //   Kept things pretty tidy as some of the queries are long.
         const query1 = fs.readFileSync(path.join(__dirname, 'queries', 'food_items.sql'), 'utf8');
         const [food] = await db.query(query1);
 
@@ -139,8 +145,6 @@ app.get('/food_items', async function (req, res) {
         const query3 = fs.readFileSync(path.join(__dirname, 'queries', 'food_items-list.sql'), 'utf8');
         const [foods] = await db.query(query3);
 
-        // Render the food_items.hbs file, and also send the renderer
-        //  an object that contains the results of the query
         res.render('food_items', {food: food, restaurant: restaurant, foods: foods});
     } catch (error) {
         console.error('Error executing queries:', error);
