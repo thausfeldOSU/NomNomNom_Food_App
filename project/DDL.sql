@@ -1,14 +1,20 @@
+-- Citation: Previously had a partner who supported throughout this query. We did it together, but we are no longer submitting together.
+--           Otherwise, All My Work
+
 -- DDL Group 77
 
 SET FOREIGN_KEY_CHECKS=0;
 SET AUTOCOMMIT = 0;
 
+-- Before adding the tables again, ensure they are deleted first.
 DROP TABLE IF EXISTS ORDERS;
 DROP TABLE IF EXISTS FOOD_ITEMS;
 DROP TABLE IF EXISTS FOOD_ITEMS_ORDERS;
 DROP TABLE IF EXISTS RESTAURANTS;
 DROP TABLE IF EXISTS CUSTOMERS;
 
+-- Once database is cleared entirely, this next stretch builds it back from scratch. 
+--  These next few CREATE statements will make all the tables in this database.
 CREATE TABLE RESTAURANTS (
     RESTAURANT_ID INT(11) AUTO_INCREMENT NOT NULL,
     RATING DECIMAL NOT NULL,
@@ -29,6 +35,7 @@ EMAIL VARCHAR(255) NOT NULL,
 PRIMARY KEY (CUSTOMER_ID)
 );
 
+-- Added the ON DELETE CASCADE ON UPDATE CASCADE to ensure no data anomalies
 CREATE TABLE ORDERS (
     ORDER_ID INT(11) AUTO_INCREMENT NOT NULL,
     ORDER_DATE DATE NOT NULL,
@@ -59,6 +66,7 @@ FOREIGN KEY (ORDER_ID) REFERENCES ORDERS(ORDER_ID) ON DELETE CASCADE ON UPDATE C
 PRIMARY KEY (ORDER_ID, FOOD_ITEM_ID)
 );
 
+-- Adding test data to see the database in action
 INSERT INTO CUSTOMERS (FIRST_NAME, LAST_NAME, PHONE_NUMBER, ADDRESS, EMAIL)
 VALUES
     ('Joe', 'Schmo', '5036872456', '1 Happy St, Corvallis, OR 97330', 'joeschmo@gmail.com'),
@@ -94,12 +102,6 @@ VALUES
         WHERE CUSTOMERS.FIRST_NAME = 'Fatima')),
     ((SELECT FOOD_ITEM_ID FROM FOOD_ITEMS WHERE FOOD_ITEMS.NAME = 'Hamburger'), (SELECT ORDER_ID FROM ORDERS JOIN CUSTOMERS ON ORDERS.CUSTOMER_ID = CUSTOMERS.CUSTOMER_ID
         WHERE CUSTOMERS.FIRST_NAME = 'Joe'));
-
-
--- SHOW TABLES;
--- SELECT * FROM FOOD_ITEMS_ORDERS
---   INNER JOIN ORDERS ON ORDERS.ORDER_ID = FOOD_ITEMS_ORDERS.ORDER_ID
---   INNER JOIN CUSTOMERS ON CUSTOMERS.CUSTOMER_ID = ORDERS.CUSTOMER_ID;
 
 SET FOREIGN_KEY_CHECKS=1;
 COMMIT;
