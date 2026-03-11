@@ -18,6 +18,7 @@
         {{! For each row, print the id, fname, lname, homeworld and age }}
         {{#each order}}
         <tr>
+            {{!-- Google AI helped with formatting the date in a more readable manner. Directed me to the SQL script directly to change format. --}}
             <td>{{this.ORDER_ID}}</td>
             <td>{{this.FOOD_ID}}</td>
             <td>{{this.ORDER_DATE}}</td>
