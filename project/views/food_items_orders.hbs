@@ -1,3 +1,8 @@
+{{!-- Citation: Google AI helped with dropdown as described below 
+                Started off with the template provided, which most of it is
+                otherwise, All My Work 
+--}}
+
 <h1>NNN Orders</h1>
 
 {{! READ table }}
@@ -15,7 +20,7 @@
     </thead>
 
     <tbody>
-        {{! For each row, print the id, fname, lname, homeworld and age }}
+        {{! For the table header row, we print the DB attribute names }}
         {{#each order}}
         <tr>
             {{!-- Google AI helped with formatting the date in a more readable manner. Directed me to the SQL script directly to change format. --}}
@@ -52,6 +57,7 @@
     <select name='update_order_id_food_id' id='update_order_id_food_id' required>
         <option value='' disabled selected>Order Number - Food Item</option>
         {{#each orders}}
+        {{!-- Google AI helped to combine these two fields into one since this is the intersection page and the unique value for this table is dependent on the combo of the food id and order id --}}
         <option value="{{this.ORDER_ID}}|{{this.FOOD_ITEM_ID}}" required>
             {{this.ORDER_ID}} - {{this.FOOD_ITEM_ID}}
         </option>

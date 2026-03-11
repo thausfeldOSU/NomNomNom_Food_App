@@ -1,3 +1,7 @@
+{{!-- Citation: Started off with the template provided, which most of it is
+                otherwise, All My Work
+ --}}
+
 <h1>NNN Restaurants</h1>
 
 {{! READ table }}
@@ -15,7 +19,7 @@
     </thead>
 
     <tbody>
-        {{! For each row, print the id, fname, lname, homeworld and age }}
+        {{! Print values for each row of data returned by the SQL statement returned from app.js }}
         {{#each restaurant}}
         <tr>
             <td>{{this.NAME}}</td>
@@ -24,21 +28,11 @@
             <td>{{this.ADDRESS}}</td>
             <td>{{this.EMAIL}}</td>
 
-            {{!-- Took out since our delete is on Food Items and Orders pages --}}
-            {{! DELETE form }}
-            {{!-- <form id='delete_person_form'>
-                <input type='hidden' name='delete_person_id' value='{{this.id}}' />
-                <input type='hidden' name='delete_person_name' value='{{this.fname}} {{this.lname}}' />
-                <td>
-                    <button type='submit'>
-                        Delete
-                    </button>
-                </td>
-            </form> --}}
+            {{!-- Took out from template since the delete is on Food Items and Orders pages --}}
         </tr>
         {{/each}}
     </tbody>
 </table>
 
-{{!-- Took out INSERT since this is on Food Items --}}
-{{!-- Took out UPDATE since this is on Food Items and Orders --}}
+{{!-- Took out template INSERT since this is on Food Items --}}
+{{!-- Took out template UPDATE since this is on Food Items and Orders --}}
