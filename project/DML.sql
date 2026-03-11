@@ -57,6 +57,7 @@ WHERE FOOD_ITEM_ID = :FOOD_ITEM_ID_FROM_FORM;
 DELETE FROM FOOD_ITEMS_ORDERS
 WHERE (ORDER_ID = :ORDER_ID_FROM_FORM AND FOOD_ITEM_ID = FOOD_ITEM_ID_FROM_FORM);
 
+-- Updates FOOD_ITEMS
 INSERT INTO FOOD_ITEMS (RESTAURANT_ID, NAME, PRICE) VALUES (:RESTAURANT_ID, :NAME, :PRICE);
 
 -- Updates a particular food item. A peer review commented that you shouldn't be able to update a food item that doesn't already belong to a particular restaurant. That wasn't the 
