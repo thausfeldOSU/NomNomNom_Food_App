@@ -3,7 +3,7 @@
 // Google AI helped setup 
 // Google AI helped set this up so that I could store the SQL in their own files and just reference them here for execution.
 //
-// Started off with the template provided
+// Based on the CS 340 starter code
 //
 // Otherwise, All My Work
 

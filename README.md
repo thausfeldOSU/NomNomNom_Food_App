@@ -1,16 +1,30 @@
 # NomNomNom_Food_App
 CS340 Group 77 Project
+Thomas Hausfeld
+Side note: This was a group project that became an individual project from step 5 onwards.
 
-We are using Node.js
-In order to setup, first SSH into the OSU server via the terminal.
-Then clone this repository
-Then, when inside the project repository, run this command: npm install mysql2 express nodemon forever express-handlebars
+Citations:
+This list is from all the files and their individual callouts for use of AI. Otherwise, it should be assumed the code is from the class template provided or the work is original. All help from AI was from google ai. When I go to the google ai chat bot, there is not easy URL. It's like, over 100 characters long so I will just report www.google.com as the source.
 
-I set the port number to 5000! So after running 'npm run development/production' when on the OSU server, go to
-http://classwork.engr.oregonstate.edu:5000
+app.js:
+Google AI helped setup all the POST route templates.
+Google AI helped setup 
+Google AI helped set this up so that I could store the SQL in their own files and just reference them here for execution.
 
-Side note, other classmates seem to be using this port as well. 5001 worked for me, so switched it to that for now. Feel free to switch to something else; its in the app.js file
+style.css:
+Google AI helped give a better look to the website.
 
-If you run this from your local machine, go to
-http://localhost:5000
-If you do run from localhost, just know that the home page is probably all that will work because the database is on OSU servers.
+food_items_orders.sql:
+Google AI directed me to the SQL script to format the date in a more readable format
+
+main.hbs:
+Google AI helped direct me to change the Navigation label to be in a span tag so that I could make it more visible based on rules in my style.css file 
+
+food_items_orders.hbs:
+Google AI helped with dropdown
+
+food_items.hbs:
+Google AI helped get input field formatting correct 
+
+PL.sql:
+Google AI helped remind me how to properly take in a value and setup the exception case when there is an error
