@@ -1,3 +1,6 @@
+-- Citation: All My Work
+-- Used for the Orders page dropdowns.
+
 SELECT FIO.ORDER_ID, FIO.FOOD_ITEM_ID, FI.NAME
 FROM FOOD_ITEMS_ORDERS AS FIO
 LEFT JOIN FOOD_ITEMS AS FI
