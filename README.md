@@ -13,7 +13,7 @@ Tech Used:
 HTML, CSS, JavaScript, SQL, and Node.js
 
 Citations:
-This list is from all the files and their individual callouts for use of AI. Otherwise, it should be assumed the code is from the class template provided or the work is original. All help from AI was from google ai. When I go to the google ai chat bot, there is not easy URL. It's over 100 characters long so I will just report www.google.com as the source but the ai mode can easily be navigated to from this website.
+This list is from all the files and their individual callouts for use of AI. Otherwise, it should be assumed the code is from the class template provided or the work is original. All help from AI was from google ai. When I go to the google ai chat bot, there is no easy URL. It's over 100 characters long so I will just report www.google.com as the source but the ai mode can easily be navigated to from this website.
 
 app.js:
 Google AI helped setup all the POST route templates.
