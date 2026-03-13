@@ -1,4 +1,5 @@
 -- Citation: All My Work
+
 -- Used for dropdown on Food Items page.
 
 SELECT *

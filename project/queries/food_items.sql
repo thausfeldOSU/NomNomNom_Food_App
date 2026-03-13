@@ -1,4 +1,5 @@
 -- Citation: All My Work
+
 -- Used for the Food Items page
 
 SELECT R.NAME AS RESTAURANT_NAME, FI.FOOD_ITEM_ID AS FOOD_ID, FI.NAME AS FOOD_NAME, FI.PRICE

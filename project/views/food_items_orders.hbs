@@ -1,4 +1,4 @@
-{{!-- Citation: Google AI helped with dropdown as described below 
+{{!-- Citation: Google AI helped with dropdown as described below (www.google.com)
                 Based on the CS 340 starter code
                 otherwise, All My Work 
 --}}
@@ -24,6 +24,7 @@
         {{#each order}}
         <tr>
             {{!-- Google AI helped with formatting the date in a more readable manner. Directed me to the SQL script directly to change format. --}}
+            {{!-- Added the columns of data myself --}}
             <td>{{this.ORDER_ID}}</td>
             <td>{{this.FOOD_ID}}</td>
             <td>{{this.ORDER_DATE}}</td>
@@ -34,6 +35,7 @@
             <td>{{this.QUANTITY}}</td>
 
             {{! DELETE form }}
+            {{!-- Used the template code, but gave names to each tag for reference in app.js --}}
             <form action='delete_order_food' method="POST">
                 <input type='hidden' name='delete_order_id' value="{{this.ORDER_ID}}"/>
                 <input type='hidden' name='delete_food_id' value="{{this.FOOD_ID}}"/>

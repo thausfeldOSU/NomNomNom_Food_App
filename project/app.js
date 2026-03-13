@@ -1,7 +1,6 @@
 // Citation:
-// Google AI helped setup all the POST route templates.
-// Google AI helped setup 
-// Google AI helped set this up so that I could store the SQL in their own files and just reference them here for execution.
+// Google AI helped setup all the POST route templates. (www.google.com)
+// Google AI helped set up some of the routes so that I could store the SQL in their own files and just reference them here for execution. (www.google.com)
 //
 // Based on the CS 340 starter code
 //
@@ -18,9 +17,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
-// 5002 for testing
-const PORT = 5002;
-// 5001
+const PORT = 5001;
 
 // Database
 const db = require('./database/db-connector');
@@ -38,6 +35,7 @@ app.set('view engine', '.hbs'); // Use handlebars engine for *.hbs files.
 // ##### RESET TO BASELINE DATABASE WITH DUMMY DATA
 app.post('/reset_db', async (req, res) => {
     try {
+        //  call the stored procedure that tears down the database and then rebuilds it to a set template
         const query1 = 'CALL sp_load_nnndb();';
         await db.query(query1);
         res.redirect('/');
@@ -53,6 +51,7 @@ app.post('/delete_food_item', async function (req, res) {
     try {
         const foodId = req.body.delete_food_id;
 
+        //  call stored procedure to delete a single food item from the database. food item to delete comes from the food_items.hbs page
         await db.query('CALL DELETE_FOOD_ITEM(?)', [foodId]);
         res.redirect('/food_items');
     } catch (error) {
@@ -66,6 +65,7 @@ app.post('/delete_order_food', async function (req, res) {
         const orderId = req.body.delete_order_id
         const foodId = req.body.delete_food_id;
 
+        // call stored procedure to delete a specific food item from a particular order. this comes from the food_itmes_orders.hbs page
         await db.query('CALL DELETE_ORDER_FOOD_ITEM(?, ?)', [orderId, foodId]);
         res.redirect('/food_items_orders');
     } catch (error) {
@@ -81,6 +81,7 @@ app.post('/create_food_item', async function (req, res) {
         const name = req.body.create_food_item_name;
         const price = req.body.create_food_item_price;
 
+        // call stored procedure to insert/create a new food item. comes from the food_items.hbs page
         await db.query('CALL CREATE_FOOD_ITEM(?, ?, ?)', [restaurantName, name, price]);
         res.redirect('/food_items');
     } catch (error) {
@@ -97,6 +98,7 @@ app.post('/update_food_item', async function (req, res) {
         const foodName = req.body.update_food_item_name;
         const price = req.body.update_food_item_price;
 
+        // call stored procedure to update a food item. comes from the food_items.hbs page
         await db.query('CALL UPDATE_FOOD_ITEM(?, ?, ?, ?)', [foodItemID, restaurantID, foodName, price]);
         res.redirect('/food_items');
     } catch (error) {
@@ -112,6 +114,7 @@ app.post('/update_food_items_orders', async function (req, res) {
         const [orderId, foodItemId] = req.body.update_order_id_food_id.split('|');
         const quantity = req.body.update_food_item_order_quantity;
 
+        // call stored procedure to update a record for a specific food item on a particular order. comes from the food_items_orders.hbs page
         await db.query('CALL UPDATE_FOOD_ITEMS_ORDERS(?, ?, ?)', [orderId, foodItemId, quantity]);
         res.redirect('/food_items_orders');
     } catch (error) {
@@ -124,6 +127,7 @@ app.post('/update_food_items_orders', async function (req, res) {
 // ###### READ ROUTES
 app.get('/', async function (req, res) {
     try {
+        // sends the user to the home page when called upon
         res.render('home');
     } catch (error) {
         console.error('Error rendering page:', error);
@@ -133,8 +137,9 @@ app.get('/', async function (req, res) {
 
 app.get('/food_items', async function (req, res) {
     try {
-        // Create and execute our queries
-        // Google AI helped set this up so that I could store the SQL in their own files and just reference them here for execution.
+        // Create and execute queries
+        // these queries are used in the food_items.hbs page and update the table and the drop downs on this page.
+        // Google AI helped set this up so that I could store the SQL in their own files and just reference them here for execution. (www.google.com)
         //   Kept things pretty tidy as some of the queries are long.
         const query1 = fs.readFileSync(path.join(__dirname, 'queries', 'food_items.sql'), 'utf8');
         const [food] = await db.query(query1);
@@ -157,7 +162,7 @@ app.get('/food_items', async function (req, res) {
 
 app.get('/restaurants', async function (req, res) {
     try {
-        // Create and execute our queries
+        // Create and execute queries
         const query1 = fs.readFileSync(path.join(__dirname, 'queries', 'restaurants.sql'), 'utf8');
         const [restaurant] = await db.query(query1);
 
@@ -216,6 +221,7 @@ app.get('/food_items_orders', async function (req, res) {
 // ########################################
 // ########## LISTENER
 
+// base code, unedited
 app.listen(PORT, function () {
     console.log(
         'Express started on http://localhost:' +

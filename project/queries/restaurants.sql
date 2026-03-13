@@ -1,4 +1,5 @@
 -- Citation: All My Work
+
 -- Used for the Restaurants page
 
 SELECT R.NAME, R.RATING, R.PHONE_NUMBER, R.ADDRESS, R.EMAIL
