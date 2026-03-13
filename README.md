@@ -3,6 +3,15 @@ CS340 Group 77 Project
 Thomas Hausfeld
 Side note: This was a group project that became an individual project from step 5 onwards.
 
+Link to Project:
+http://classwork.engr.oregonstate.edu:5001/
+
+Description:
+This project is the CS340 database project. Specifically, this project depicts a new, sample food ordering app. Here is the business pitch: NomNomNom offers a new way to order food. When it comes to choosing your next meal, it can be hard to make a choice. This is particularly true when there are an infinite amount of choices. NomNomNom present users with a swiping interphase where users swipe until they find an appealing food item. No searching restaurants, no perusing menues, but straight to the food!
+
+Tech Used:
+HTML, CSS, JavaScript, SQL, and Node.js
+
 Citations:
 This list is from all the files and their individual callouts for use of AI. Otherwise, it should be assumed the code is from the class template provided or the work is original. All help from AI was from google ai. When I go to the google ai chat bot, there is not easy URL. It's over 100 characters long so I will just report www.google.com as the source but the ai mode can easily be navigated to from this website.
 
